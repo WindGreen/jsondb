@@ -4,6 +4,7 @@ class JsonAddress
 {
 	public static $__address=0;
 	public static $addressBook=[];
+	public static $addressMap=[];//实际底层不需要这个映射
 
 	public $address;
 
