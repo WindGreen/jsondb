@@ -92,7 +92,8 @@ article2->set('title','article3')
 John=site1->get('users')->get('John')
 article2->set('author',John)
 
-Alice=root->find('Alice',0)	//找第一个name=alice的元素
+site1=root->find('site1')	//找拥有属性名为site1的元素的元素
+site1=root->find(['name','=','site1']) //找到拥有属性名为name属性值为site1的元素
 Alices=root->findAll('Alice') //找到所有name=alice的元素
 Alices=root->findAll('Alice',3)	//找到3个
 Alices=root->findAll('Alice',3,5) //找到3个 偏移5个

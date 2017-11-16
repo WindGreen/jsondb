@@ -6,7 +6,13 @@ class JsonList extends JsonObject
 	public function __construct($data)
 	{
 		parent::__construct();
-		$this->list=$data;
+		foreach ($data as $item) {
+			$this->list[]=$item->getAddress();
+		}
 	}
 
+	public function find()
+	{
+		
+	}
 }

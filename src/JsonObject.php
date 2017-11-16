@@ -5,11 +5,15 @@ class JsonObject
     private $__attributes = []; //属性
     private $__address;
 
+    public static $__attrBook=[];
+
     public function __construct($attr=[])
     {
         $this->__address = new JsonAddress($this);
         JsonAddress::regist($this);
-        $this->__attributes=$attr;
+        foreach ($attr as $key => $value) {
+        	$this->set($key,$value);
+        }
     }
 
     public function __get($name)
@@ -25,6 +29,8 @@ class JsonObject
     public function __set($name, $value)
     {
         $this->__attributes[$name] = $value;
+        if(!in_array([$name=>$this], static::$__attrBook))
+        	static::$__attrBook[]=[$name=>$this];
     }
 
     public function get($name)
