@@ -33,27 +33,52 @@ class JsonDB
 
             }
         } elseif (is_array($name)) {
-        	list($n,$p,$v)=$name;
-        	switch ($p) {
-        		case '=':
-		            foreach (JsonObject::$__attrBook as $attr) {
-		                if (key($attr) == $n && $attr[$n]->get($n)==$v) {
-		                    return $attr[$n];
-		                }
-		            }
-        			break;
-        		
-        		default:
-        			# code...
-        			break;
-        	}
+            list($n, $p, $v) = $name;
+            switch ($p) {
+                case '=':
+                    foreach (JsonObject::$__attrBook as $attr) {
+                        if (key($attr) == $n && $attr[$n]->get($n) == $v) {
+                            return $attr[$n];
+                        }
+                    }
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
         }
         return null;
     }
 
-    public function import($json)
+    public static function import($json)
     {
+        $obj      = json_decode($json);
+        $db       = new JsonDB();
+        $db->root = static::initObj($obj);
+        return $db;
+    }
 
+    public static function initObj($obj)
+    {
+        if (is_object($obj)) {
+            $object = new JsonObject([]);
+            foreach ($obj as $name => $value) {
+                if (is_object($value) || is_array($value)) {
+                    $object->set($name, static::initObj($value));
+                } else {
+                    $object->set($name, $obj->$name);
+                }
+            }
+            return $object;
+        } elseif (is_array($obj)) {
+            $list=new JsonList([]);
+            foreach ($obj as $item) {
+                $list->add(static::initObj($item));
+            }
+            return $list;
+        }
+        return null;
     }
 
 }

@@ -11,6 +11,11 @@ class JsonList extends JsonObject
 		}
 	}
 
+	public function add($item)
+	{
+		$this->list[]=$item->getAddress();
+	}
+
 	public function find()
 	{
 
