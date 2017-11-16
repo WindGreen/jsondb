@@ -26,4 +26,9 @@ class JsonAddress
 	{
 		return static::$addressBook[$this->address];
 	}
+
+	public function toArray()
+	{
+		return "#0x{$this->address}";
+	}
 }

@@ -13,6 +13,15 @@ class JsonList extends JsonObject
 
 	public function find()
 	{
-		
+
+	}
+
+	public function toArray()
+	{
+		$result=[];
+		foreach ($this->list as $key => $value) {
+			$result[]=$value->locate()->toArray();
+		}
+		return $result;
 	}
 }

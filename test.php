@@ -17,10 +17,19 @@ $site1->set('users',new JsonList([
 	new JsonObject(['name'=>'Alice']),
 ]));
 
-$site=$db->find('users');
-print_r($site->get('users'));
+// $site=$db->find('users');
+//print_r($site->get('users'));
 // var_dump($site1->get('users'));
 
 // var_dump($site1->get('name'));
 
 //var_dump(JsonAddress::$addressBook);
+
+//$users=$site1->get('users');
+$john=$db->find(['name','=','John']);
+//var_dump($john->toArray());
+
+$john->set('ownSite',$site1);
+//var_dump($john);
+//
+var_dump($db->toArray());

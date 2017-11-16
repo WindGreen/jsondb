@@ -40,7 +40,6 @@ class JsonDB
 		                if (key($attr) == $n && $attr[$n]->get($n)==$v) {
 		                    return $attr[$n];
 		                }
-
 		            }
         			break;
         		
@@ -51,4 +50,10 @@ class JsonDB
         }
         return null;
     }
+
+    public function import($json)
+    {
+
+    }
+
 }
